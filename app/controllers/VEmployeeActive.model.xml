@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="vEmployeeActive" alias="vEmployeeActive" created="2019-04-24T15:44:10" modified="2019-04-25T17:03:02" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="PTOSite" parentTableSchema="dbo" parentTableName="PTOSite" x="397" y="20">
+      <foreignKeyColumn columnName="homedept" parentColumnName="jobno" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="employeeid" fieldName="Employeeid" label="Employee ID" primaryKey="true" />
+    <column name="company_code" fieldName="CompanyCode" label="Company Code" />
+    <column name="site_code" fieldName="SiteCode" label="Site Code" />
+    <column name="filenumber" fieldName="Filenumber" label="File Number" />
+    <column name="first_name" fieldName="FirstName" label="First Name" />
+    <column name="last_name" fieldName="LastName" label="Last Name" />
+    <column name="employment_status" fieldName="EmploymentStatus" label="Employment Status" />
+    <column name="position_code" fieldName="PositionCode" label="Position Code" />
+    <column name="position" fieldName="Position" label="Position" />
+    <column name="address1" fieldName="Address1" label="Address1" />
+    <column name="address2" fieldName="Address2" label="Address2" />
+    <column name="city" fieldName="City" label="City" />
+    <column name="state" fieldName="State" label="State" />
+    <column name="zipcode" fieldName="Zipcode" label="Zip Code" />
+    <column name="phone_home" fieldName="PhoneHome" label="Phone (Home)" />
+    <column name="phone_mobile" fieldName="PhoneMobile" label="Phone (Mobile)" />
+    <column name="gender" fieldName="Gender" label="Gender" />
+    <column name="maritalstatus" fieldName="Maritalstatus" label="Marital Status" />
+    <column name="homedept" fieldName="Homedept" label="Home Dept" aliasColumnName="jobno" aliasForeignKey="PTOSite" />
+    <column name="jobno" fieldName="PtositeJobno" label="PTO Site Job No" foreignKey="PTOSite" />
+    <column name="employeetype" fieldName="Employeetype" label="Employee Type" />
+    <column name="rate1amt" fieldName="Rate1amt" label="Rate1amt" />
+    <column name="birthdate" fieldName="Birthdate" label="Birthdate" format="g" />
+    <column name="hire_date" fieldName="HireDate" label="Hire Date" format="g" />
+    <column name="rehire_date" fieldName="RehireDate" label="Rehire Date" format="g" />
+    <column name="termination_date" fieldName="TerminationDate" label="Termination Date" format="g" />
+    <column name="jobno" fieldName="Jobno" label="Job No." />
+    <column name="site_name" fieldName="SiteName" label="Site Name" />
+    <column name="manager_name" fieldName="ManagerName" label="Manager Name" />
+    <column name="siteid" fieldName="Siteid" label="Site ID" />
+    <column name="employement_status_override" fieldName="EmployementStatusOverride" label="Employement Status Override" />
+    <column name="union_status" fieldName="UnionStatus" label="Union Status" />
+    <column name="email" fieldName="Email" label="Email" />
+    <column name="seniority_date" fieldName="SeniorityDate" label="Seniority Date" format="g" />
+    <column name="termination_code" fieldName="TerminationCode" label="Termination Code" />
+    <column name="termination_note" fieldName="TerminationNote" label="Termination Note" />
+    <column name="termination_reason" fieldName="TerminationReason" label="Termination Reason" />
+    <column name="termination_type" fieldName="TerminationType" label="Termination Type" />
+    <column name="autopaid" fieldName="Autopaid" label="Autopaid" />
+    <column name="paygroup" fieldName="Paygroup" label="Paygroup" />
+    <column name="ultipro_updated_date" fieldName="UltiproUpdatedDate" label="Ultipro Updated Date" format="g" />
+    <column name="salhr_type" fieldName="SalhrType" label="Salhr Type" />
+    <column name="autopay" fieldName="Autopay" label="Autopay" />
+    <column name="paidthru_date" fieldName="PaidthruDate" label="Paidthru Date" format="g" />
+    <column name="ultipro_employeeid" fieldName="UltiproEmployeeid" label="Ultipro Employeeid" />
+    <column name="lastpaid_date_formatted" fieldName="LastpaidDateFormatted" label="Lastpaid Date Formatted" />
+    <column name="lastpaid_date" fieldName="LastpaidDate" label="Lastpaid Date" format="g" />
+    <column name="birthday" fieldName="Birthday" label="Birthday" />
+    <column name="scheduledwork_hours" fieldName="ScheduledworkHours" label="Scheduledwork Hours" />
+    <column name="workstatus" fieldName="Workstatus" label="Work Status" />
+    <column name="paygroup_code" fieldName="PaygroupCode" label="Paygroup Code" />
+    <column name="location" fieldName="Location" label="Location" />
+    <column name="jobcode" fieldName="Jobcode" label="Job Code" />
+    <column name="managerid" fieldName="Managerid" label="Manager ID" />
+    <column name="site_state" fieldName="SiteState" label="Site State" />
+    <column name="city_section" fieldName="CitySection" label="City Section" />
+    <column name="companyregion_code" fieldName="CompanyregionCode" label="Companyregion Code" />
+    <column name="site_address1" fieldName="SiteAddress1" label="Site Address1" />
+    <column name="site_address2" fieldName="SiteAddress2" label="Site Address2" />
+    <column name="site_workorder" fieldName="SiteWorkorder" label="Site Workorder" />
+    <column fieldName="Fullname" type="varchar(61)" dataType="String" label="Fullname">
+      <formula>CONCAT(first_name,' ',last_name) </formula>
+    </column>
+  </columns>
+</dataModel>

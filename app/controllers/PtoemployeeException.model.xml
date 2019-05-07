@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PTOEmployeeException" alias="PTOEmployeeException" created="2019-04-24T15:48:39" modified="2019-04-26T12:15:43" x="20" y="20" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="State" parentTableSchema="dbo" parentTableName="State" x="349" y="20">
+      <foreignKeyColumn columnName="state" parentColumnName="state" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ptositetempid" fieldName="Ptositetempid" label="PTO Site Temp ID" />
+    <column name="company_code" fieldName="CompanyCode" label="Company Code" />
+    <column name="fileno" fieldName="Fileno" label="File No." />
+    <column name="ultipro_employeeid" fieldName="UltiproEmployeeid" label="Ultipro Employee ID" />
+    <column name="employee_name" fieldName="EmployeeName" label="Employee Name" />
+    <column name="employee_name_excel" fieldName="EmployeeNameExcel" label="Employee Name in Excel" />
+    <column name="homedept" fieldName="Homedept" label="Home Dept" />
+    <column name="state" fieldName="State" label="State" aliasColumnName="state" aliasForeignKey="State" />
+    <column name="state" fieldName="state1" label="State" foreignKey="State" />
+    <column name="county" fieldName="County" label="County" />
+    <column name="site_name" fieldName="SiteName" label="Site Name" />
+    <column name="site_name_excel" fieldName="SiteNameExcel" label="Site Name Excel" />
+    <column name="pto_code" fieldName="PtoCode" label="PTO Code" />
+    <column name="pto_benefit_code" fieldName="PtoBenefitCode" label="Pto Benefit Code" />
+    <column name="isGF" fieldName="IsGf" label="is GF" />
+    <column name="comment" fieldName="Comment" label="Comment" />
+    <column name="created_date" fieldName="CreatedDate" label="Created Date" format="g" />
+  </columns>
+</dataModel>

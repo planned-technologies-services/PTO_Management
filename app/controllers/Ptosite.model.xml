@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataModel baseSchema="dbo" baseTable="PTOSite" alias="PTOSite" created="2019-04-24T15:33:00" modified="2019-04-26T12:16:14" x="20" y="22" xmlns="urn:schemas-codeontime-com:data-model">
+  <foreignKeys>
+    <foreignKey id="State" parentTableSchema="dbo" parentTableName="State" x="314" y="20">
+      <foreignKeyColumn columnName="state" parentColumnName="state" />
+    </foreignKey>
+  </foreignKeys>
+  <columns>
+    <column name="ptositeid" fieldName="Ptositeid" label="PTO Site ID" />
+    <column name="company_code" fieldName="CompanyCode" label="Company Code" />
+    <column name="jobno" fieldName="Jobno" label="Job No." />
+    <column name="site_name" fieldName="SiteName" label="Site Name" />
+    <column name="site_name_excel" fieldName="SiteNameExcel" label="Site Name for Excel" />
+    <column name="state" fieldName="State" label="State" aliasColumnName="state" aliasForeignKey="State" />
+    <column name="state" fieldName="state1" label="State" foreignKey="State" />
+    <column name="county" fieldName="County" label="County" />
+    <column name="workstatus" fieldName="Workstatus" label="Work Status" />
+    <column name="pto_code" fieldName="PtoCode" label="PTO Code" />
+    <column name="pto_code_pt" fieldName="PtoCodePt" label="PTO Code - Part Time" />
+    <column name="pto_benefit_code" fieldName="PtoBenefitCode" label="PTO Benefit Code" />
+    <column name="pto_code2" fieldName="PtoCode2" label="PTO Code 2" />
+    <column name="pto_code2_pt" fieldName="PtoCode2Pt" label="PTO Code 2 - Part Time" />
+    <column name="pto_benefit_code2" fieldName="PtoBenefitCode2" label="PTO Benefit Code 2" />
+    <column name="pto_type" fieldName="PtoType" label="PTO Type" />
+    <column name="pto_firstyear_code" fieldName="PtoFirstyearCode" label="PTO Firstyear Code" />
+    <column name="union_desc" fieldName="UnionDesc" label="Union Desc" />
+    <column name="comment" fieldName="Comment" label="Comment" />
+    <column name="created_date" fieldName="CreatedDate" label="Created Date" format="g" />
+    <column name="updated_date" fieldName="UpdatedDate" label="Updated Date" format="g" />
+  </columns>
+</dataModel>

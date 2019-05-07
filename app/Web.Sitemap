@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+  <siteMapNode title="^SiteHome^Home^SiteHome^" description="" url="~/index.html">
+    <siteMapNode title="^HomePath^Home^HomePath^" description="^HomeDesc^Application home page^HomeDesc^" url="~/pages/home" cssClass="Wide" />
+    <siteMapNode title="Sites" description="View PTO Sites" url="~/pages/ptosite" cssClass="material-icon-location_city" />
+    <siteMapNode title="Employee Exceptions" description="View PTO Employee Exceptions" url="~/pages/ptoemployee-exception" cssClass="material-icon-people" />
+    <siteMapNode title="Site Content" description="View Site Content" url="~/pages/site-content" />
+  </siteMapNode>
+</siteMap>

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="PtoemployeeException" conflictDetection="overwriteChanges" label="Ptoemployee Exception" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PTOEmployeeException"."ptositetempid" "Ptositetempid"
+	,"PTOEmployeeException"."company_code" "CompanyCode"
+	,"PTOEmployeeException"."fileno" "Fileno"
+	,"PTOEmployeeException"."ultipro_employeeid" "UltiproEmployeeid"
+	,"PTOEmployeeException"."employee_name" "EmployeeName"
+	,"PTOEmployeeException"."employee_name_excel" "EmployeeNameExcel"
+	,"PTOEmployeeException"."homedept" "Homedept"
+	,"PTOEmployeeException"."state" "State"
+	,"State"."state" "state1"
+	,"PTOEmployeeException"."county" "County"
+	,"PTOEmployeeException"."site_name" "SiteName"
+	,"PTOEmployeeException"."site_name_excel" "SiteNameExcel"
+	,"PTOEmployeeException"."pto_code" "PtoCode"
+	,"PTOEmployeeException"."pto_benefit_code" "PtoBenefitCode"
+	,"PTOEmployeeException"."isGF" "IsGf"
+	,"PTOEmployeeException"."comment" "Comment"
+	,"PTOEmployeeException"."created_date" "CreatedDate"
+from "dbo"."PTOEmployeeException" "PTOEmployeeException"
+	left join "dbo"."State" "State" on "PTOEmployeeException"."state" = "State"."state"
+]]></text>
+    </command>
+    <command id="ptositetempidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Ptositetempid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Ptositetempid" type="Int32" allowNulls="false" isPrimaryKey="true" label="PTO Site Temp ID" readOnly="true" />
+    <field name="CompanyCode" type="String" label="Company Code" length="3" showInSummary="true" />
+    <field name="Fileno" type="String" label="File No." length="7" showInSummary="true" />
+    <field name="UltiproEmployeeid" type="String" label="Ultipro Employee ID" length="20" showInSummary="true" />
+    <field name="EmployeeName" type="String" label="Employee Name" length="50" showInSummary="true" />
+    <field name="EmployeeNameExcel" type="String" label="Employee Name in Excel" length="50" showInSummary="true" />
+    <field name="Homedept" type="String" label="Home Dept" length="7" />
+    <field name="State" type="String" label="State" length="2">
+      <items style="Lookup" dataController="State" newDataView="createForm1" dataValueField="State" dataTextField="State" />
+    </field>
+    <field name="state1" type="String" readOnly="true" label="State" length="2" />
+    <field name="County" type="String" label="County" length="30" />
+    <field name="SiteName" type="String" label="Site Name" length="50" />
+    <field name="SiteNameExcel" type="String" label="Site Name Excel" length="50" />
+    <field name="PtoCode" type="String" label="PTO Code" length="6">
+      <items dataView="grid1" dataTextField="AccrualoptionCode" copy="PtoCodeDesc=PtoCodeDesc" />
+    </field>
+    <field name="PtoBenefitCode" type="String" label="Pto Benefit Code" length="6" />
+    <field name="IsGf" type="Boolean" label="is GF" />
+    <field name="Comment" type="String" allowQBE="false" allowSorting="false" label="Comment" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Employee Exceptions" tags="material-icon-people">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="EmployeeName" columns="50" />
+        <dataField fieldName="EmployeeNameExcel" columns="50" />
+        <dataField fieldName="Homedept" columns="7" />
+        <dataField fieldName="CompanyCode" columns="3" />
+        <dataField fieldName="Fileno" columns="7" />
+        <dataField fieldName="UltiproEmployeeid" columns="20" />
+        <dataField fieldName="State" aliasFieldName="state1" />
+        <dataField fieldName="County" columns="30" />
+        <dataField fieldName="SiteName" columns="50" />
+        <dataField fieldName="PtoCode" columns="6" />
+        <dataField fieldName="PtoBenefitCode" columns="6" />
+        <dataField fieldName="Comment" rows="5" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Employee Exception" tags="material-icon-people">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="PTO Information" id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="PtoBenefitCode" columns="6" />
+            <dataField fieldName="PtoCode" columns="6" />
+          </dataFields>
+        </category>
+        <category id="c1" headerText="General Information">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="EmployeeName" columns="50" />
+            <dataField fieldName="EmployeeNameExcel" columns="50" />
+            <dataField fieldName="Homedept" columns="7" />
+            <dataField fieldName="CompanyCode" columns="3" />
+            <dataField fieldName="Fileno" columns="7" />
+            <dataField fieldName="UltiproEmployeeid" columns="20" />
+            <dataField fieldName="State" aliasFieldName="state1" />
+            <dataField fieldName="County" columns="30" />
+            <dataField fieldName="SiteName" columns="50" />
+            <dataField fieldName="Comment" rows="5" />
+          </dataFields>
+        </category>
+        <category headerText="Audit" id="c3">
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Employee Exception" tags="material-icon-people">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category headerText="PTO Information" id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="PtoBenefitCode" columns="6" />
+          </dataFields>
+        </category>
+        <category id="c1" headerText="General Information">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CompanyCode" columns="3" />
+            <dataField fieldName="Fileno" columns="7" />
+            <dataField fieldName="UltiproEmployeeid" columns="20" />
+            <dataField fieldName="EmployeeName" columns="50" />
+            <dataField fieldName="EmployeeNameExcel" columns="50" />
+            <dataField fieldName="Homedept" columns="7" />
+            <dataField fieldName="State" aliasFieldName="state1" />
+            <dataField fieldName="County" columns="30" />
+            <dataField fieldName="SiteName" columns="50" />
+            <dataField fieldName="SiteNameExcel" columns="50" />
+            <dataField fieldName="IsGf" />
+            <dataField fieldName="Comment" rows="5" />
+            <dataField fieldName="CreatedDate" columns="10" hidden="true" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a6" />
+      <action id="a7" commandName="New" commandArgument="grid1" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" commandArgument="Save" />
+      <action id="a7" whenLastCommandName="New" commandName="Insert" commandArgument="SaveAndNew" />
+      <action id="a8" whenLastCommandName="New" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+      <action id="a13" whenLastCommandName="Insert" whenLastCommandArgument="Save" whenView="createForm1" commandName="Select" commandArgument="editForm1" whenClientScript="this.hasDetails()" />
+      <action id="a14" whenLastCommandName="Insert" whenLastCommandArgument="SaveAndNew" commandName="New" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag3" scope="ActionBar" headerText="New" flat="true">
+      <action id="a1" commandName="New" commandArgument="createForm1" cssClass="NewIcon" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+      <action id="a2" />
+      <action id="a3" commandName="ExportRowset" />
+      <action id="a4" commandName="ExportRss" />
+      <action id="a5" />
+      <action id="a6" commandName="Import" commandArgument="createForm1" />
+      <action id="a7" commandName="DataSheet" />
+      <action id="a8" commandName="Grid" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a3" whenLastCommandName="New" commandName="Insert" />
+      <action id="a4" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a6" whenLastCommandName="New" commandName="Insert" />
+      <action id="a7" whenLastCommandName="New" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="New" type="Sql" phase="Execute"><![CDATA[SET @CreatedDate = GETDATE()]]></rule>
+  </businessRules>
+</dataController>

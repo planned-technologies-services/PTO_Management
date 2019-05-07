@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="Ptosite" conflictDetection="overwriteChanges" label="Ptosite" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"PTOSite"."ptositeid" "Ptositeid"
+	,"PTOSite"."company_code" "CompanyCode"
+	,"PTOSite"."jobno" "Jobno"
+	,"PTOSite"."site_name" "SiteName"
+	,"PTOSite"."site_name_excel" "SiteNameExcel"
+	,"PTOSite"."state" "State"
+	,"State"."state" "state1"
+	,"PTOSite"."county" "County"
+	,"PTOSite"."workstatus" "Workstatus"
+	,"PTOSite"."pto_code" "PtoCode"
+	,"PTOSite"."pto_code_pt" "PtoCodePt"
+	,"PTOSite"."pto_benefit_code" "PtoBenefitCode"
+	,"PTOSite"."pto_code2" "PtoCode2"
+	,"PTOSite"."pto_code2_pt" "PtoCode2Pt"
+	,"PTOSite"."pto_benefit_code2" "PtoBenefitCode2"
+	,"PTOSite"."pto_type" "PtoType"
+	,"PTOSite"."pto_firstyear_code" "PtoFirstyearCode"
+	,"PTOSite"."union_desc" "UnionDesc"
+	,"PTOSite"."comment" "Comment"
+	,"PTOSite"."created_date" "CreatedDate"
+	,"PTOSite"."updated_date" "UpdatedDate"
+from "dbo"."PTOSite" "PTOSite"
+	left join "dbo"."State" "State" on "PTOSite"."state" = "State"."state"
+]]></text>
+    </command>
+    <command id="ptositeidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Ptositeid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Ptositeid" type="Int32" allowNulls="false" isPrimaryKey="true" label="PTO Site ID" readOnly="true" />
+    <field name="CompanyCode" type="String" label="Company Code" length="3" showInSummary="true" />
+    <field name="Jobno" type="String" label="Job No." length="7" showInSummary="true" />
+    <field name="SiteName" type="String" label="Site Name" length="50" showInSummary="true" />
+    <field name="SiteNameExcel" type="String" label="Site Name for Excel" length="50" showInSummary="true" />
+    <field name="State" type="String" label="State" length="2" showInSummary="true">
+      <items style="Lookup" dataController="State" newDataView="createForm1" dataValueField="State" dataTextField="State" />
+    </field>
+    <field name="state1" type="String" readOnly="true" label="State" length="2" />
+    <field name="County" type="String" label="County" length="30" />
+    <field name="Workstatus" type="String" default="('F')" label="Work Status" length="1" />
+    <field name="PtoCode" type="String" label="PTO Code" length="6">
+      <items dataView="grid1" dataTextField="AccrualoptionCode" copy="PtoCodeDesc=AccrualplanDesc" />
+    </field>
+    <field name="PtoCodePt" type="String" label="PTO Code - Part Time" length="6">
+      <items copy="PtoCodePtDesc=AccrualplanDesc" dataTextField="AccrualoptionCode" dataView="grid1" />
+    </field>
+    <field name="PtoBenefitCode" type="String" label="PTO Benefit Code" length="6" />
+    <field name="PtoCode2" type="String" label="PTO Code 2" length="6">
+      <items dataView="grid1" dataTextField="AccrualoptionCode" copy="PtoCode2Desc=AccrualplanDesc" />
+    </field>
+    <field name="PtoCode2Pt" type="String" label="PTO Code 2 - Part Time" length="6">
+      <items dataView="grid1" dataTextField="AccrualoptionCode" copy="PtoCode2PtDesc=AccrualplanDesc" />
+    </field>
+    <field name="PtoBenefitCode2" type="String" label="PTO Benefit Code 2" length="6" />
+    <field name="PtoType" type="String" label="PTO Type" length="10" />
+    <field name="PtoFirstyearCode" type="String" label="PTO Firstyear Code" length="6" />
+    <field name="UnionDesc" type="String" label="Union Desc" length="200" />
+    <field name="Comment" type="String" allowQBE="false" allowSorting="false" label="Comment" />
+    <field name="CreatedDate" type="DateTime" dataFormatString="g" default="(getdate())" label="Created Date" />
+    <field name="UpdatedDate" type="DateTime" dataFormatString="g" label="Updated Date" />
+    <field name="ActiveEmployees" type="DataView" label="Active Employees" contextFields="Homedept=Jobno">
+      <dataView controller="ActiveEmployees" view="grid1" filterFields="Homedept" />
+    </field>
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Sites" tags="material-icon-location_city">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="SiteName" columns="50" />
+        <dataField fieldName="CompanyCode" columns="3" />
+        <dataField fieldName="Jobno" columns="7" />
+        <dataField fieldName="State" aliasFieldName="state1" />
+        <dataField fieldName="County" columns="30" />
+        <dataField fieldName="PtoCode" columns="6" />
+        <dataField fieldName="PtoBenefitCode" columns="6" />
+        <dataField fieldName="PtoCode2" columns="6" />
+        <dataField fieldName="PtoBenefitCode2" columns="6" />
+        <dataField fieldName="UnionDesc" />
+        <dataField fieldName="Comment" rows="5" />
+        <dataField fieldName="CreatedDate" columns="20" />
+        <dataField fieldName="UpdatedDate" columns="20" />
+        <dataField fieldName="PtoCodePt" columns="6" />
+        <dataField fieldName="PtoCode2Pt" columns="6" />
+        <dataField fieldName="ActiveEmployees" columns="15" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Site" tags="material-icon-location_city">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category headerText="PTO Information" id="c2" flow="NewColumn">
+          <dataFields>
+            <dataField fieldName="PtoCode" columns="6" />
+            <dataField fieldName="PtoBenefitCode" columns="6" />
+            <dataField fieldName="PtoCode2" columns="6" />
+            <dataField fieldName="PtoBenefitCode2" columns="6" />
+            <dataField fieldName="UnionDesc" />
+            <dataField fieldName="PtoCodePt" columns="6" />
+            <dataField fieldName="PtoCode2Pt" columns="6" />
+          </dataFields>
+        </category>
+        <category id="c1" headerText="General Information">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="SiteName" columns="50" />
+            <dataField fieldName="CompanyCode" columns="3" />
+            <dataField fieldName="Jobno" columns="7" />
+            <dataField fieldName="State" aliasFieldName="state1" />
+            <dataField fieldName="County" columns="30" />
+            <dataField fieldName="Comment" rows="5" />
+          </dataFields>
+        </category>
+        <category headerText="Employees at this Site" id="c3">
+          <dataFields />
+        </category>
+        <category headerText="Audit" id="c4">
+          <dataFields>
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="UpdatedDate" columns="20" />
+            <dataField fieldName="ActiveEmployees" columns="15" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Ptosite">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CompanyCode" columns="3" />
+            <dataField fieldName="Jobno" columns="7" />
+            <dataField fieldName="SiteName" columns="50" />
+            <dataField fieldName="SiteNameExcel" columns="50" />
+            <dataField fieldName="State" aliasFieldName="state1" />
+            <dataField fieldName="County" columns="30" />
+            <dataField fieldName="Workstatus" columns="1" />
+            <dataField fieldName="PtoCode" columns="6" />
+            <dataField fieldName="PtoCodePt" columns="6" />
+            <dataField fieldName="PtoBenefitCode" columns="6" />
+            <dataField fieldName="PtoCode2" columns="6" />
+            <dataField fieldName="PtoCode2Pt" columns="6" />
+            <dataField fieldName="PtoBenefitCode2" columns="6" />
+            <dataField fieldName="PtoType" columns="10" />
+            <dataField fieldName="PtoFirstyearCode" columns="6" />
+            <dataField fieldName="UnionDesc" />
+            <dataField fieldName="Comment" rows="5" />
+            <dataField fieldName="CreatedDate" columns="20" />
+            <dataField fieldName="UpdatedDate" columns="20" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+      <action id="a2" commandName="Edit" />
+      <action id="a3" commandName="Delete" />
+      <action id="a8" commandName="Duplicate" commandArgument="createForm1" />
+    </actionGroup>
+    <actionGroup id="ag2" scope="Form">
+      <action id="a1" commandName="Edit" />
+      <action id="a2" commandName="Delete" />
+      <action id="a3" commandName="Cancel" />
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" commandArgument="Save" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+      <action id="a9" whenLastCommandName="Duplicate" commandName="Insert" />
+      <action id="a10" whenLastCommandName="Duplicate" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag4" scope="ActionBar" headerText="Edit/Delete" flat="true">
+      <action id="a1" whenKeySelected="true" commandName="Edit" commandArgument="editForm1" cssClass="EditIcon" whenView="grid1" />
+      <action id="a2" whenKeySelected="true" commandName="Delete" cssClass="DeleteIcon" whenView="grid1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+    </actionGroup>
+    <actionGroup id="ag6" scope="ActionBar" headerText="Record">
+      <action id="a1" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a2" whenLastCommandName="Edit" commandName="Cancel" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+    <actionGroup id="ag8" scope="Row">
+      <action id="a4" whenLastCommandName="Edit" commandName="Update" />
+      <action id="a5" whenLastCommandName="Edit" commandName="Cancel" />
+    </actionGroup>
+  </actions>
+  <businessRules>
+    <rule id="r100" commandName="Update" type="Sql" phase="Execute"><![CDATA[SET @UpdatedDate = GETDATE()]]></rule>
+    <rule id="updateSiteEmployees" commandName="Update" type="Sql" phase="Execute"><![CDATA[update [PPM].[dbo].[PTOEmployee]
+set  pto_code = @PtoCode
+where homedept = @Jobno
+and workstatus = 'F'
+and employment_status = 'A'
+
+update [PPM].[dbo].[PTOEmployee]
+set  pto_code = @PtoCodePt
+where homedept = @Jobno
+and workstatus = 'P'
+and employment_status = 'A']]></rule>
+  </businessRules>
+</dataController>

@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="VEmployeeActive" conflictDetection="overwriteChanges" label="V Employee Active" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"vEmployeeActive"."employeeid" "Employeeid"
+	,"vEmployeeActive"."company_code" "CompanyCode"
+	,"vEmployeeActive"."site_code" "SiteCode"
+	,"vEmployeeActive"."filenumber" "Filenumber"
+	,"vEmployeeActive"."first_name" "FirstName"
+	,"vEmployeeActive"."last_name" "LastName"
+	,"vEmployeeActive"."employment_status" "EmploymentStatus"
+	,"vEmployeeActive"."position_code" "PositionCode"
+	,"vEmployeeActive"."position" "Position"
+	,"vEmployeeActive"."address1" "Address1"
+	,"vEmployeeActive"."address2" "Address2"
+	,"vEmployeeActive"."city" "City"
+	,"vEmployeeActive"."state" "State"
+	,"vEmployeeActive"."zipcode" "Zipcode"
+	,"vEmployeeActive"."phone_home" "PhoneHome"
+	,"vEmployeeActive"."phone_mobile" "PhoneMobile"
+	,"vEmployeeActive"."gender" "Gender"
+	,"vEmployeeActive"."maritalstatus" "Maritalstatus"
+	,"vEmployeeActive"."homedept" "Homedept"
+	,"PTOSite"."jobno" "PtositeJobno"
+	,"vEmployeeActive"."employeetype" "Employeetype"
+	,"vEmployeeActive"."rate1amt" "Rate1amt"
+	,"vEmployeeActive"."birthdate" "Birthdate"
+	,"vEmployeeActive"."hire_date" "HireDate"
+	,"vEmployeeActive"."rehire_date" "RehireDate"
+	,"vEmployeeActive"."termination_date" "TerminationDate"
+	,"vEmployeeActive"."jobno" "Jobno"
+	,"vEmployeeActive"."site_name" "SiteName"
+	,"vEmployeeActive"."manager_name" "ManagerName"
+	,"vEmployeeActive"."siteid" "Siteid"
+	,"vEmployeeActive"."employement_status_override" "EmployementStatusOverride"
+	,"vEmployeeActive"."union_status" "UnionStatus"
+	,"vEmployeeActive"."email" "Email"
+	,"vEmployeeActive"."seniority_date" "SeniorityDate"
+	,"vEmployeeActive"."termination_code" "TerminationCode"
+	,"vEmployeeActive"."termination_note" "TerminationNote"
+	,"vEmployeeActive"."termination_reason" "TerminationReason"
+	,"vEmployeeActive"."termination_type" "TerminationType"
+	,"vEmployeeActive"."autopaid" "Autopaid"
+	,"vEmployeeActive"."paygroup" "Paygroup"
+	,"vEmployeeActive"."ultipro_updated_date" "UltiproUpdatedDate"
+	,"vEmployeeActive"."salhr_type" "SalhrType"
+	,"vEmployeeActive"."autopay" "Autopay"
+	,"vEmployeeActive"."paidthru_date" "PaidthruDate"
+	,"vEmployeeActive"."ultipro_employeeid" "UltiproEmployeeid"
+	,"vEmployeeActive"."lastpaid_date_formatted" "LastpaidDateFormatted"
+	,"vEmployeeActive"."lastpaid_date" "LastpaidDate"
+	,"vEmployeeActive"."birthday" "Birthday"
+	,"vEmployeeActive"."fullname" "Fullname"
+	,"vEmployeeActive"."scheduledwork_hours" "ScheduledworkHours"
+	,"vEmployeeActive"."workstatus" "Workstatus"
+	,"vEmployeeActive"."paygroup_code" "PaygroupCode"
+	,"vEmployeeActive"."location" "Location"
+	,"vEmployeeActive"."jobcode" "Jobcode"
+	,"vEmployeeActive"."managerid" "Managerid"
+	,"vEmployeeActive"."site_state" "SiteState"
+	,"vEmployeeActive"."city_section" "CitySection"
+	,"vEmployeeActive"."companyregion_code" "CompanyregionCode"
+	,"vEmployeeActive"."site_address1" "SiteAddress1"
+	,"vEmployeeActive"."site_address2" "SiteAddress2"
+	,"vEmployeeActive"."site_workorder" "SiteWorkorder"
+from "dbo"."vEmployeeActive" "vEmployeeActive"
+	left join "dbo"."PTOSite" "PTOSite" on "vEmployeeActive"."homedept" = "PTOSite"."jobno"
+]]></text>
+    </command>
+    <command id="manageridIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Managerid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Employeeid" type="Int32" allowNulls="false" isPrimaryKey="true" label="Employee ID" />
+    <field name="CompanyCode" type="String" label="Company Code" length="50" showInSummary="true" />
+    <field name="SiteCode" type="String" label="Site Code" length="3" showInSummary="true" />
+    <field name="Filenumber" type="String" label="File Number" length="7" showInSummary="true" />
+    <field name="FirstName" type="String" label="First Name" length="30" showInSummary="true" />
+    <field name="LastName" type="String" label="Last Name" length="30" showInSummary="true" />
+    <field name="EmploymentStatus" type="String" label="Employment Status" length="1" />
+    <field name="PositionCode" type="String" label="Position Code" length="8" />
+    <field name="Position" type="String" label="Position" length="65" />
+    <field name="Address1" type="String" label="Address1" length="30" />
+    <field name="Address2" type="String" label="Address2" length="30" />
+    <field name="City" type="String" label="City" length="30" />
+    <field name="State" type="String" label="State" length="2" />
+    <field name="Zipcode" type="String" label="Zip Code" length="10" />
+    <field name="PhoneHome" type="String" label="Phone (Home)" length="20" />
+    <field name="PhoneMobile" type="String" label="Phone (Mobile)" length="20" />
+    <field name="Gender" type="String" label="Gender" length="1" />
+    <field name="Maritalstatus" type="String" label="Marital Status" length="1" />
+    <field name="Homedept" type="String" label="Home Dept" length="7">
+      <items style="Lookup" dataController="Ptosite" newDataView="createForm1" dataValueField="Jobno" dataTextField="Jobno" />
+    </field>
+    <field name="PtositeJobno" type="String" readOnly="true" label="PTO Site Job No" length="7" />
+    <field name="Employeetype" type="String" label="Employee Type" length="50" />
+    <field name="Rate1amt" type="Decimal" label="Rate1amt" />
+    <field name="Birthdate" type="DateTime" dataFormatString="g" label="Birthdate" />
+    <field name="HireDate" type="DateTime" dataFormatString="g" label="Hire Date" />
+    <field name="RehireDate" type="DateTime" dataFormatString="g" label="Rehire Date" />
+    <field name="TerminationDate" type="DateTime" dataFormatString="g" label="Termination Date" />
+    <field name="Jobno" type="String" label="Job No." length="7" />
+    <field name="SiteName" type="String" label="Site Name" length="30" />
+    <field name="ManagerName" type="String" label="Manager Name" length="50" />
+    <field name="Siteid" type="String" label="Site ID" length="7" />
+    <field name="EmployementStatusOverride" type="String" label="Employement Status Override" length="1" />
+    <field name="UnionStatus" type="String" label="Union Status" length="10" />
+    <field name="Email" type="String" label="Email" length="60" />
+    <field name="SeniorityDate" type="DateTime" dataFormatString="g" label="Seniority Date" />
+    <field name="TerminationCode" type="String" label="Termination Code" length="6" />
+    <field name="TerminationNote" type="String" allowQBE="false" allowSorting="false" label="Termination Note" />
+    <field name="TerminationReason" type="String" label="Termination Reason" length="50" />
+    <field name="TerminationType" type="String" label="Termination Type" length="3" />
+    <field name="Autopaid" type="String" label="Autopaid" length="1" />
+    <field name="Paygroup" type="String" label="Paygroup" length="6" />
+    <field name="UltiproUpdatedDate" type="DateTime" dataFormatString="g" label="Ultipro Updated Date" />
+    <field name="SalhrType" type="String" label="Salhr Type" length="1" />
+    <field name="Autopay" type="String" label="Autopay" length="1" />
+    <field name="PaidthruDate" type="DateTime" dataFormatString="g" label="Paidthru Date" />
+    <field name="UltiproEmployeeid" type="String" label="Ultipro Employeeid" length="12" />
+    <field name="LastpaidDateFormatted" type="String" label="Lastpaid Date Formatted" readOnly="true" length="8" />
+    <field name="LastpaidDate" type="DateTime" dataFormatString="g" label="Lastpaid Date" />
+    <field name="Birthday" type="String" label="Birthday" readOnly="true" length="33" />
+    <field name="Fullname" type="String" label="Fullname" readOnly="true" length="62" />
+    <field name="ScheduledworkHours" type="Decimal" label="Scheduledwork Hours" />
+    <field name="Workstatus" type="String" label="Work Status" length="50">
+      <items style="DropDownList">
+        <item value="F" text="Full Time" />
+        <item value="P" text="Part Time" />
+      </items>
+    </field>
+    <field name="PaygroupCode" type="String" label="Paygroup Code" length="10" />
+    <field name="Location" type="String" label="Location" length="10" />
+    <field name="Jobcode" type="String" label="Job Code" length="10" />
+    <field name="Managerid" type="Int32" label="Manager ID" readOnly="true" />
+    <field name="SiteState" type="String" label="Site State" length="2" />
+    <field name="CitySection" type="String" label="City Section" length="30" />
+    <field name="CompanyregionCode" type="String" label="Companyregion Code" length="6" />
+    <field name="SiteAddress1" type="String" label="Site Address1" length="30" />
+    <field name="SiteAddress2" type="String" label="Site Address2" length="30" />
+    <field name="SiteWorkorder" type="String" label="Site Workorder" length="1" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="Active Employees">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="FirstName" columns="30" />
+        <dataField fieldName="LastName" columns="30" />
+        <dataField fieldName="CompanyCode" columns="50" />
+        <dataField fieldName="Filenumber" columns="7" />
+        <dataField fieldName="EmploymentStatus" columns="1" />
+        <dataField fieldName="Homedept" aliasFieldName="PtositeJobno" />
+        <dataField fieldName="Jobno" columns="7" />
+        <dataField fieldName="SiteName" columns="30" />
+        <dataField fieldName="ManagerName" columns="50" />
+        <dataField fieldName="Paygroup" columns="6" />
+        <dataField fieldName="LastpaidDate" columns="20" />
+        <dataField fieldName="Workstatus" columns="50" />
+        <dataField fieldName="Location" columns="10" />
+        <dataField fieldName="Jobcode" columns="10" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review Active Employee" showInSelector="false">
+      <headerText />
+      <categories>
+        <category id="c1" headerText="Information" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="FirstName" columns="30" />
+            <dataField fieldName="LastName" columns="30" />
+            <dataField fieldName="CompanyCode" columns="50" />
+            <dataField fieldName="Filenumber" columns="7" />
+            <dataField fieldName="EmploymentStatus" columns="1" />
+            <dataField fieldName="Homedept" aliasFieldName="PtositeJobno" />
+            <dataField fieldName="Jobno" columns="7" />
+            <dataField fieldName="SiteName" columns="30" />
+            <dataField fieldName="ManagerName" columns="50" />
+            <dataField fieldName="Paygroup" columns="6" />
+            <dataField fieldName="LastpaidDate" columns="20" />
+            <dataField fieldName="Workstatus" columns="50" />
+            <dataField fieldName="Location" columns="10" />
+            <dataField fieldName="Jobcode" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New Active Employee">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="Information" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="CompanyCode" columns="50" />
+            <dataField fieldName="Filenumber" columns="7" />
+            <dataField fieldName="FirstName" columns="30" />
+            <dataField fieldName="LastName" columns="30" />
+            <dataField fieldName="EmploymentStatus" columns="1" />
+            <dataField fieldName="Homedept" aliasFieldName="PtositeJobno" />
+            <dataField fieldName="Jobno" columns="7" />
+            <dataField fieldName="SiteName" columns="30" />
+            <dataField fieldName="ManagerName" columns="50" />
+            <dataField fieldName="Paygroup" columns="6" />
+            <dataField fieldName="LastpaidDate" columns="20" />
+            <dataField fieldName="Workstatus" columns="50" />
+            <dataField fieldName="Location" columns="10" />
+            <dataField fieldName="Jobcode" columns="10" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+    <actionGroup id="ag5" scope="ActionBar" headerText="Actions">
+      <action id="a1" commandName="ExportCsv" />
+    </actionGroup>
+    <actionGroup id="ag7" scope="ActionBar" headerText="Report">
+      <action id="a1" commandName="ReportAsPdf" />
+      <action id="a2" commandName="ReportAsImage" />
+      <action id="a3" commandName="ReportAsExcel" />
+      <action id="a4" commandName="ReportAsWord" />
+    </actionGroup>
+  </actions>
+</dataController>

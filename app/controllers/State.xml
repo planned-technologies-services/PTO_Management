@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dataController name="State" conflictDetection="overwriteChanges" label="State" xmlns="urn:schemas-codeontime-com:data-aquarium">
+  <commands>
+    <command id="command1" type="Text">
+      <text><![CDATA[
+select
+	"State"."stateid" "Stateid"
+	,"State"."state" "State"
+	,"State"."description" "Description"
+from "dbo"."State" "State"
+]]></text>
+    </command>
+    <command id="stateidIdentityCommand" type="Text" event="Inserted">
+      <text><![CDATA[select @@identity]]></text>
+      <output>
+        <fieldOutput fieldName="Stateid" />
+      </output>
+    </command>
+  </commands>
+  <fields>
+    <field name="Stateid" type="Int32" allowNulls="false" isPrimaryKey="true" label="Stateid" readOnly="true" />
+    <field name="State" type="String" allowNulls="false" label="State" length="2" showInSummary="true" />
+    <field name="Description" type="String" label="Description" length="50" showInSummary="true" />
+  </fields>
+  <views>
+    <view id="grid1" type="Grid" commandId="command1" label="State">
+      <headerText>$DefaultGridViewDescription</headerText>
+      <dataFields>
+        <dataField fieldName="State" columns="2" />
+        <dataField fieldName="Description" columns="50" />
+      </dataFields>
+    </view>
+    <view id="editForm1" type="Form" commandId="command1" label="Review State">
+      <headerText>$DefaultEditViewDescription</headerText>
+      <categories>
+        <category id="c1" headerText="State" flow="NewColumn">
+          <description><![CDATA[$DefaultEditDescription]]></description>
+          <dataFields>
+            <dataField fieldName="State" columns="2" />
+            <dataField fieldName="Description" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+    <view id="createForm1" type="Form" commandId="command1" label="New State">
+      <headerText>$DefaultCreateViewDescription</headerText>
+      <categories>
+        <category id="c1" flow="NewColumn">
+          <description><![CDATA[$DefaultNewDescription]]></description>
+          <dataFields>
+            <dataField fieldName="State" columns="2" />
+            <dataField fieldName="Description" columns="50" />
+          </dataFields>
+        </category>
+      </categories>
+    </view>
+  </views>
+  <actions>
+    <actionGroup id="ag1" scope="Grid">
+      <action id="a1" commandName="Select" commandArgument="editForm1" />
+    </actionGroup>
+  </actions>
+</dataController>
